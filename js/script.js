@@ -26,11 +26,24 @@ const updateCountdown = (weddingDate, timeOffset) => {
   const gap = weddingDate - now;
 
   if(gap <= 0) {
+    const today = new Date(now);
+    today.setHours(0, 0, 0, 0);
+
+    const weddingDay = new Date(weddingDate);
+    weddingDay.setHours(0, 0, 0, 0);
+
+    if(today > weddingDay) { //day after wedding
+      const textSpan = document.querySelector(".finished-text span");
+      const textH2 = document.querySelector(".finished-text h2");
+
+      textSpan.textContent = "With Love & Gratitude";
+      textH2.textContent = "Thank You for Celebrating";
+    }
+
     countdownEl.classList.add("hidden");
     finishedEl.classList.remove("hidden");
     return;
   }
-
   countdownEl.classList.remove("hidden");
   finishedEl.classList.add("hidden");
 
